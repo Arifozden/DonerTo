@@ -1,0 +1,22 @@
+{
+  "name": "donerto",
+  "version": "1.0.0",
+  "description": "Donation Portal",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "donation",
+    "portal",
+    "node.js"
+  ],
+  "author": "arifozden",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
