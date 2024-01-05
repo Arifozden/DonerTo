@@ -24,6 +24,9 @@ exports.createProduct = async (req, res) => {
 exports.getAllProducts = async (req, res) => {
   try {
     const categorySlug = req.query.categories;
+
+    const query = req.query.search;
+
     const category = await Category.findOne({ slug: categorySlug });
 
     let filter = {};
@@ -32,7 +35,21 @@ exports.getAllProducts = async (req, res) => {
       filter = { category: category._id };
     }
 
-    const products = await Product.find(filter).sort('-createdAt'); // Corrected this line
+    if (query) {
+      filter = {name:query};
+    }
+
+    if(!query && !categorySlug) {
+      filter.name = "";
+      filter.category = null;
+    }
+
+    const products = await Product.find({
+      $or: [
+        { name: { $regex: '.*' + filter.name + '.*', $options: 'i' } },
+        { category: filter.category },
+      ],
+    }).sort('-createdAt').populate('user'); // Corrected this line
     const categories = await Category.find({});
     res.status(200).render('products', {
       products,
@@ -53,10 +70,12 @@ exports.getAllProducts = async (req, res) => {
     try {
       const user = await User.findById(req.session.userID);
       const product = await Product.findOne({slug: req.params.slug}).populate('user');
+      const categories = await Category.find({});
       res.status(200).render('product',{
         product,
         page_name: 'product',
-        user
+        user,
+        categories
       })
     } catch (error) {
       res.status(400).json({
