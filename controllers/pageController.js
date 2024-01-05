@@ -32,6 +32,7 @@ exports.getContactPage = (req, res) => {
 }
 
 exports.sendEmail = async (req, res) => {
+  try{
   const outputMessage = `
   <h1>Mail Details</h1>
   <ul>
@@ -60,5 +61,13 @@ let info = await transporter.sendMail({
 });
 console.log("Message sent: %s", info.messageId);
 console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+
+req.flash('success', 'Your message sent successfully!');
+
 res.status(200).redirect('/contact');
+}catch(err){
+  console.log(err);
+  req.flash('error', 'Your message could not sent!');
+  res.status(400).redirect('/contact');
 }
+};
