@@ -1,0 +1,9 @@
+<div class="form-group">
+							<div class="col-sm-12">
+								<select class="form-control" name="category">
+									<% for (let i=0; i< categories.length; i++) { %>
+									<option value="<%= categories[i]._id %>"><%= categories[i].name %></option>
+									<% } %>	
+								</select>
+							</div>
+						</div>
