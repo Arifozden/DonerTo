@@ -33,8 +33,12 @@
 								<div class="course-title">
 									<h2><a href="/products/<%= user.products[i].slug  %>" title=""><%= user.products[i].name %></a></h2>
 								</div>
-								<div class="course-desc">
+								<div class="course-desc" style="padding-bottom: 4px;">
 									<p><%= user.products[i].price %></p>
+									<form method="POST" action="/products/oldCart">
+										<input type="hidden" name="product_id" value="<%= user.products[i]._id %>">
+										<button type="submit" class="btn btn-danger text-white"><span>Remove From Cart</span></button>
+									</form>
 								</div>
 								<!-- İletişim butonu ekleyelim -->
 								<button class="btn btn-primary" data-toggle="modal" data-target="#contactModal<%= i %>">Contact Selger</button>

@@ -27,7 +27,7 @@
 								<h2><a href="/products/<%= products[i].slug  %>" title=""><%= products[i].name  %></a></h2>
 							</div>
 							<div class="course-desc">
-								<p><%= products[i].description  %></p>
+								<p><%= products[i].description.substring(0,100) + "..."  %></p>
 							</div>
                             <div class="div">
                                 <p><%= products[i].price  %></p>

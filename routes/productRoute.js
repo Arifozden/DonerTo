@@ -8,5 +8,6 @@ router.route('/').post(roleMiddleware(["selger", "admin"]),productController.cre
 router.route('/').get(productController.getAllProducts);
 router.route('/:slug').get(productController.getProduct);
 router.route('/cart').post(productController.addToCart);
+router.route('/oldCart').post(productController.removeFromCart);
 
 module.exports = router;
