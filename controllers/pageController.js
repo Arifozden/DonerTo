@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+const Product = require('../models/Product');
+const User = require('../models/User');
 
 exports.getAboutPage = (req, res) => {
     res.status(200).render('about', {
@@ -6,10 +8,19 @@ exports.getAboutPage = (req, res) => {
     });
   };
 
-exports.getIndexPage = (req, res) => {
-  console.log(req.session.userID);
+exports.getIndexPage = async (req, res) => {
+  
+    const products = await Product.find().sort('-createdAt').limit(3);
+    const totalProducts = await Product.find().countDocuments();
+    const totalUsers = await User.countDocuments({role: 'user'});
+    const totalSelgers = await User.countDocuments({role: 'selger'});
+
     res.status(200).render('index', {
       page_name: 'index',
+      products,
+      totalProducts,
+      totalUsers,
+      totalSelgers
     });
 };
 
