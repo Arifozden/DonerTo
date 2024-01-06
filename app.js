@@ -16,6 +16,7 @@ const app = express();
 //Connect DB
 mongoose
   .connect('mongodb+srv://arifozden1:voqlAqQQL0UAu6jT@cluster0.6wzadk5.mongodb.net/?retryWrites=true&w=majority', {
+    connectTimeoutMS: 30000,
   })
   .then(() => {
     console.log('DB CONNECTED!');
