@@ -15,7 +15,7 @@ const app = express();
 
 //Connect DB
 mongoose
-  .connect('mongodb://localhost/donerto-db', {
+  .connect('mongodb+srv://arifozden1:FQUeMIQ2je8BOrcb@cluster0.3nt1avz.mongodb.net/donerto?retryWrites=true&w=majority', {
   })
   .then(() => {
     console.log('DB CONNECTED!');
@@ -67,7 +67,7 @@ app.post('/contact', (req, res) => {
 });
 
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
