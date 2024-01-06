@@ -118,3 +118,20 @@ exports.getAllProducts = async (req, res) => {
       });
     }
   }
+
+  exports.deleteProduct = async (req, res) => {
+    try {
+      // Veritabanından ürünü slug'ına göre bul ve sil
+      const product = await Product.findOneAndDelete({ slug: req.params.slug });
+      req.flash('error', `Product : ${product.name} has been removed successfully!`);
+      // Başarı durumunda kullanıcıyı yönlendir
+      res.status(200).redirect('/users/dashboard');
+    } catch (error) {
+      // Hata durumunda istemciye hata bilgisini gönder
+      res.status(400).json({
+        status: 'fail',
+        error,
+      });
+    }
+  };
+  
