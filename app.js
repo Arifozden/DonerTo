@@ -38,7 +38,7 @@ app.use(session({
   secret: 'my_keyboard_cat',
   resave: false,
   saveUninitialized: true,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost/donerto-db' }),
+  store: MongoStore.create({ mongoUrl: 'mongodb+srv://arifozden1:FQUeMIQ2je8BOrcb@cluster0.3nt1avz.mongodb.net/donerto?retryWrites=true&w=majority' }),
 }))
 app.use(flash());
 app.use((req, res, next) => {
