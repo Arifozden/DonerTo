@@ -134,4 +134,23 @@ exports.getAllProducts = async (req, res) => {
       });
     }
   };
+
+  exports.updateProduct = async (req, res) => {
+    try {
+      const product = await Product.findOne({ slug: req.params.slug });
+      product.name = req.body.name;
+      product.description = req.body.description;
+      product.price = req.body.price;
+      product.category = req.body.category; 
+      product.save();
+
+      res.status(200).redirect('/users/dashboard');
+    } catch (error) {
+      res.status(400).json({
+        status: 'fail',
+        error,
+      });
+    }
+  }
+
   
